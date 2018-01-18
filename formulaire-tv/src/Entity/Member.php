@@ -14,6 +14,10 @@ class Member
 	 * @var string
 	 *
 	 * @Assert\NotBlank()
+	 * @Assert\Email(
+	 *     message = "L'email '{{ value }}' n'est pas une adresse email valide.",
+	 *     checkMX = true
+	 * )
 	 */
 	protected $email;
 	
@@ -21,6 +25,7 @@ class Member
 	 * @var string
 	 *
 	 * @Assert\NotBlank()
+	 * @Assert\Type("string")
 	 */
 	protected $name;
 	
@@ -34,36 +39,53 @@ class Member
 	 * @var string
 	 *
 	 * @Assert\NotBlank()
+	 * @Assert\Type("string")
 	 */
 	protected $bio;
 	
 	/**
 	 * @var string
 	 *
+	 * @Assert\Url(
+	 *    protocols = {"http", "https"}
+	 * )
 	 */
 	protected $url;
 	
 	/**
 	 * @var string
 	 *
+	 * @Assert\Url(
+	 *    message = "L'url '{{ value }}' n'est pas une URL valide",
+	 *    protocols = {"http", "https"}
+	 * )
+	 * @Assert\Regex("/facebook/")
 	 */
 	protected $facebook;
 	
 	/**
 	 * @var string
 	 *
+	 * @Assert\Type("string")
+	 * @Assert\Regex("/@/")
 	 */
 	protected $twitter;
 	
 	/**
 	 * @var string
 	 *
+	 * @Assert\Type("string")
 	 */
 	protected $instagram;
 	
 	/**
 	 * @var string
 	 *
+	 * @Assert\Url(
+	 *    message = "L'url '{{ value }}' n'est pas une URL valide",
+	 *    protocols = {"http", "https"}
+	 * )
+	 * @Assert\Regex("/linkedin\.com/")
 	 */
 	protected $linkedin;
 	
@@ -85,6 +107,16 @@ class Member
 	public function setName($name)
 	{
 		$this->name = $name;
+	}
+	
+	public function getLogo()
+	{
+		return $this->logo;
+	}
+	
+	public function setLogo($logo)
+	{
+		$this->logo = $logo;
 	}
 	
 	public function getBio()

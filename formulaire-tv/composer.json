@@ -18,6 +18,7 @@
         "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
+        "laravel/homestead": "^7.0",
         "symfony/dotenv": "^4.0",
         "symfony/web-server-bundle": "^4.0"
     },

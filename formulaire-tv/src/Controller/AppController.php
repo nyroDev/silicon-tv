@@ -6,23 +6,28 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Member;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class AppController extends Controller
 {
 	
 	/**
-	 * @Route("/")
+	 * @Route("/", name="home")
+	 * @param Request $request
+	 * @return Response
 	 */
-	public function home()
+	public function home(Request $request)
 	{
 		$member = new Member();
-		$test = $this->getDoctrine()->getRepository(Member::class)->findAll();
-		var_dump($test);
 		
 		$form = $this->createFormBuilder($member)
             ->add('email', EmailType::class)
@@ -36,11 +41,39 @@ class AppController extends Controller
             ->add('linkedin', UrlType::class)
             ->add('submit', SubmitType::class, ['label' => 'Envoyer'])
 			->getForm();
+		
+		$form->handleRequest($request);
+		
+		if ($form->isSubmitted() && $form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$member = $form->getData();
 			
+			$em->persist($member);
+			$em->flush();
+			
+			$this->addFlash("succes-popup", "Success !");
+			$this->redirectToRoute("home");
+		}
+		
 		return $this->render('home.html.twig', [
-			'form' => $form->createView(),
-			'test' => $test
+			'form' => $form->createView()
 		]);
+	}
+	
+	/**
+	 * @Route("/dump", name="dump")
+	 * @return JsonResponse
+	 */
+	public function dump()
+	{
+		$members = $this->getDoctrine()->getRepository(Member::class)->findAll();
+		$encoders = [new JsonEncoder()];
+		$normalizers = [new ObjectNormalizer()];
+		
+		$serializer = new Serializer($normalizers, $encoders);
+		$json = $serializer->serialize($members, 'json');
+		
+		return new JsonResponse($json, 200, [], true);
 	}
 	
 }

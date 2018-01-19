@@ -27,7 +27,6 @@ class Member
 	 * @Assert\NotBlank()
 	 * @Assert\Email(
 	 *     message = "L'email '{{ value }}' n'est pas une adresse email valide.",
-	 *     checkMX = true
 	 * )
 	 * @ORM\Column(name="email", type="string", length=255, nullable=false)
 	 */
@@ -43,34 +42,33 @@ class Member
 	protected $name;
 	
 	/**
+	 * @var File
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
 	 * @Vich\UploadableField(mapping="logo", fileNameProperty="imageName", size="imageSize")
-	 *
-	 * @var File
 	 */
-	private $imageFile;
+	protected $imageFile;
 	
 	/**
-	 * @ORM\Column(type="string", length=255)
-	 *
 	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=255)
 	 */
-	private $imageName;
+	protected $imageName;
 	
 	/**
-	 * @ORM\Column(type="integer")
-	 *
 	 * @var integer
+	 *
+	 * @ORM\Column(type="integer")
 	 */
-	private $imageSize;
+	protected $imageSize;
 	
 	/**
-	 * @ORM\Column(type="datetime")
-	 *
 	 * @var \DateTime
+	 *
+	 * @ORM\Column(type="datetime")
 	 */
-	private $updatedAt;
+	protected $updatedAt;
 	
 	/**
 	 * @var string
@@ -131,6 +129,13 @@ class Member
 	 * @ORM\Column(type="string")
 	 */
 	protected $linkedin;
+	
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", nullable=false, options={"default"="1"})
+	 */
+	protected $valid;
 	
 	/**
 	 * Get email
@@ -388,6 +393,29 @@ class Member
 	public function setLinkedin($linkedin)
 	{
 		$this->linkedin = $linkedin;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get if member is valid
+	 *
+	 * @return boolean
+	 */
+	public function getValid()
+	{
+		return $this->valid;
+	}
+	
+	/**
+	 * Set a member valid
+	 *
+	 * @param $valid
+	 * @return Member
+	 */
+	public function setValid($valid)
+	{
+		$this->valid = $valid;
 		
 		return $this;
 	}

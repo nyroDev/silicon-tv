@@ -133,9 +133,9 @@ class Member
 	/**
 	 * @var bool
 	 *
-	 * @ORM\Column(type="boolean", nullable=false, options={"default"="1"})
+	 * @ORM\Column(type="boolean", nullable=false, options={"default"=true})
 	 */
-	protected $valid;
+	protected $valid = true;
 	
 	/**
 	 * Get email

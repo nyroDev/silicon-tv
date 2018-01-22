@@ -1,13 +1,47 @@
 $silicon-yellow: #fbd800;
+$silicon-darkyellow: #e2c200;
 $silicon-blue: #21bbef;
 $silicon-darkblue: #11b0e6;
 
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/type';
+
+$link-color: $text-color;
+$font-family-serif: Podkova,"Times New Roman",Times,serif;
+$brand-primary: $silicon-yellow;
+$btn-default-bg: $silicon-yellow;
+$btn-default-border: $silicon-darkyellow;
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-family-serif;
+	margin-top: $line-height-computed;
+	margin-bottom: $line-height-computed;
+}
+
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/scaffolding';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/normalize';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/grid';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/theme';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/utilities';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/buttons';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/forms';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/list-group';
 
+.background-yellow {
+	background-color: $silicon-yellow;
+}
+
+.background-blue {
+	background-color: $silicon-blue;
+}
+
+header {
+	padding: 1em;
+}
+
+footer {
+	margin-top: 5em;
+	box-shadow: 0 500px 0 500px $silicon-blue;
+}

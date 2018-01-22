@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-		<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700italic' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Podkova:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ asset('./build/css/app.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>

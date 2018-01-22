@@ -85,7 +85,7 @@ class Member
 	 * @Assert\Url(
 	 *    protocols = {"http", "https"}
 	 * )
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $url;
 	
@@ -97,7 +97,7 @@ class Member
 	 *    protocols = {"http", "https"}
 	 * )
 	 * @Assert\Regex("/facebook/")
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $facebook;
 	
@@ -106,7 +106,7 @@ class Member
 	 *
 	 * @Assert\Type("string")
 	 * @Assert\Regex("/@/")
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $twitter;
 	
@@ -114,7 +114,7 @@ class Member
 	 * @var string
 	 *
 	 * @Assert\Type("string")
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $instagram;
 	
@@ -126,7 +126,7 @@ class Member
 	 *    protocols = {"http", "https"}
 	 * )
 	 * @Assert\Regex("/linkedin\.com/")
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $linkedin;
 	

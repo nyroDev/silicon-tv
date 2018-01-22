@@ -35,11 +35,21 @@ class AppController extends Controller
             ->add('name', TextType::class)
             ->add('imageFile', VichFileType::class)
             ->add('bio', TextareaType::class)
-            ->add('url', UrlType::class)
-            ->add('facebook', UrlType::class)
-            ->add('twitter', TextType::class)
-            ->add('instagram', TextType::class)
-            ->add('linkedin', UrlType::class)
+            ->add('url', UrlType::class, [
+				'required'   => false,
+			])
+            ->add('facebook', UrlType::class, [
+				'required'   => false,
+			])
+            ->add('twitter', TextType::class, [
+				'required'   => false,
+			])
+            ->add('instagram', TextType::class, [
+				'required'   => false,
+			])
+            ->add('linkedin', UrlType::class, [
+				'required'   => false,
+			])
             ->add('submit', SubmitType::class, ['label' => 'Envoyer'])
 			->getForm();
 		

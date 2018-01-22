@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,7 +34,7 @@ class AppController extends Controller
             ->add('email', EmailType::class)
             ->add('name', TextType::class)
             ->add('imageFile', VichFileType::class)
-            ->add('bio', TextType::class)
+            ->add('bio', TextareaType::class)
             ->add('url', UrlType::class)
             ->add('facebook', UrlType::class)
             ->add('twitter', TextType::class)
@@ -51,13 +52,21 @@ class AppController extends Controller
 			$em->persist($member);
 			$em->flush();
 			
-			$this->addFlash("succes-popup", "Success !");
-			$this->redirectToRoute("home");
+			$this->redirectToRoute("valid");
 		}
 		
 		return $this->render('home.html.twig', [
 			'form' => $form->createView()
 		]);
+	}
+	
+	/**
+	 * @Route("/valid", name="valid")
+	 * @return Response
+	 */
+	public function valid()
+	{
+		return $this->render('valid.html.twig');
 	}
 	
 	/**

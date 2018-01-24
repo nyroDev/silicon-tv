@@ -42,6 +42,8 @@ header {
 }
 
 footer {
+	position: absolute;
+	bottom: 0;
+	height: 2em;
 	margin-top: 5em;
-	box-shadow: 0 500px 0 500px $silicon-blue;
 }

@@ -17,16 +17,30 @@
 	
 	<section class="background-white">
 		<div class="container">
+			{{ form_start(form) }}
 			<div class="col-md-6">
-				{{ form(form) }}
+				{{ form_row(form.email) }}
+				{{ form_row(form.name) }}
+				{{ form_row(form.bio) }}
+				{{ form_row(form.imageFile) }}
 			</div>
+			<div class="col-md-6">
+				{{ form_row(form.url) }}
+				{{ form_row(form.facebook) }}
+				{{ form_row(form.twitter) }}
+				{{ form_row(form.instagram) }}
+				{{ form_row(form.linkedin) }}
+			</div>
+			{{ form_end(form) }}
+		
 		</div>
 	</section>
 	
 	<footer class="background-blue footer">
 		<div class="container">
 			<ul class="list-unstyled list-inline">
-				<li><a href="https://www.siliconcomte.fr/mentions-legales/" class="sc-caps sc-link-darker">mentions légales</a></li>
+				<li><a href="https://www.siliconcomte.fr/mentions-legales/" class="sc-caps sc-link-darker">mentions
+						légales</a></li>
 				<li><a href="https://www.siliconcomte.fr/contact/" class="sc-caps sc-link-darker">contacts</a></li>
 				<li><a href="https://www.siliconcomte.fr/credits/" class="sc-caps sc-link-darker">crédits</a></li>
 			</ul>

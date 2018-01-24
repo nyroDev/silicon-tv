@@ -14,4 +14,9 @@ tinymce.init({
   ],
   branding: false,
   image_advtab: true,
+  setup: function (editor) {
+    editor.on('change', function () {
+      editor.save();
+    });
+  }
 });

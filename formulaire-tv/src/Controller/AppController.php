@@ -34,7 +34,11 @@ class AppController extends Controller
             ->add('email', EmailType::class)
             ->add('name', TextType::class)
             ->add('imageFile', VichFileType::class)
-            ->add('bio', TextareaType::class)
+            ->add('bio', TextareaType::class, [
+            	'attr' => [
+            		'class' => 'textarea'
+				],
+			])
             ->add('url', UrlType::class, [
 				'required'   => false,
 			])

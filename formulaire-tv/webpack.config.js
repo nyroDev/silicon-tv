@@ -1,4 +1,7 @@
 var Encore = require('@symfony/webpack-encore');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
     // the project directory where compiled assets will be stored
@@ -7,11 +10,10 @@ Encore
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
-    // uncomment to create hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+    .enableVersioning()
 
     // uncomment to define the assets of the project
-    // .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/main', './assets/main.js')
     .addStyleEntry('css/app', './assets/global.scss')
 
     // uncomment if you use Sass/SCSS files
@@ -19,8 +21,32 @@ Encore
       resolveUrlLoader: false
     })
 
+    .addPlugin(new copyWebpackPlugin([
+      { from: './node_modules/tinymce/plugins', to: './plugins' },
+      { from: './node_modules/tinymce/themes', to: './themes' },
+      { from: './node_modules/tinymce/skins', to: './skins' },
+    ]))
+
     // uncomment for legacy applications that require $/jQuery as a global variable
-    .autoProvidejQuery()
+    // .autoProvidejQuery()
 ;
+
+const config = Encore.getWebpackConfig();
+
+if (Encore.isProduction()) {
+  config.plugins = config.plugins.filter(plugin => !(plugin instanceof webpack.optimize.UglifyJsPlugin));
+  config.plugins.push(new UglifyJsPlugin({
+    exclude: /vendor/,
+    parallel: true,
+    uglifyOptions: {
+      ie8: true,
+      ecma: 6,
+      warnings: false,
+    },
+    output: {
+      ascii_only: true,
+    },
+  }));
+}
 
 module.exports = Encore.getWebpackConfig();

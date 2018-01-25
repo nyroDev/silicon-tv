@@ -1,5 +1,4 @@
 import tinymce from 'tinymce/tinymce';
-//import 'tinymce/themes/inlite';
 import 'tinymce/themes/modern/theme';
 
 tinymce.init({
@@ -20,3 +19,5 @@ tinymce.init({
     });
   }
 });
+
+document.getElementsByTagName('form')[0].onsubmit = tinyMCE.triggerSave();

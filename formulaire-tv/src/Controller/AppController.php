@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Member;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AppController extends Controller
 {
@@ -33,7 +32,10 @@ class AppController extends Controller
 		$form = $this->createFormBuilder($member)
             ->add('email', EmailType::class)
             ->add('name', TextType::class)
-            ->add('imageFile', VichFileType::class)
+            ->add('imageFile', VichImageType::class, [
+				'image_uri' => true,
+            	'imagine_pattern' => 'squared_thumbnail'
+			])
             ->add('bio', TextareaType::class, [
             	'attr' => [
             		'class' => 'textarea'
@@ -61,12 +63,13 @@ class AppController extends Controller
 		
 		if ($form->isSubmitted() && $form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
+			/** @var Member $member */
 			$member = $form->getData();
 			
 			$em->persist($member);
 			$em->flush();
 			
-			$this->redirectToRoute("valid");
+			return $this->redirectToRoute('valid', ['id' => $member->getId()]);
 		}
 		
 		return $this->render('home.html.twig', [
@@ -75,12 +78,16 @@ class AppController extends Controller
 	}
 	
 	/**
-	 * @Route("/valid", name="valid")
+	 * @Route("/valid/{id}", name="valid")
+	 * @param int $id
 	 * @return Response
 	 */
-	public function valid()
+	public function valid(int $id)
 	{
-		return $this->render('valid.html.twig');
+		$member = $this->getDoctrine()->getRepository(Member::class)->find($id);
+		return $this->render('valid.html.twig', [
+			'member' => $member
+		]);
 	}
 	
 	/**

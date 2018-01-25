@@ -138,6 +138,16 @@ class Member
 	protected $valid = true;
 	
 	/**
+	 * Get id
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+	
+	/**
 	 * Get email
 	 *
 	 * @return string

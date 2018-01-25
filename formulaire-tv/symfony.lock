@@ -59,6 +59,9 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
+    "imagine/imagine": {
+        "version": "v0.6.3"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -67,6 +70,15 @@
     },
     "laravel/homestead": {
         "version": "v7.0.1"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "d2a601ea5ccad81de2a131ed68481d012ed4667c"
+        }
     },
     "ocramius/package-versions": {
         "version": "1.2.0"

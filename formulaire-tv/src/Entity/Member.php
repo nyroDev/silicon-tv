@@ -47,6 +47,7 @@ class Member
 	 * @var File
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
+	 * @Assert\NotBlank()
 	 * @Vich\UploadableField(mapping="logo", fileNameProperty="imageName", size="imageSize")
 	 */
 	protected $imageFile;
@@ -54,7 +55,7 @@ class Member
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=false)
 	 */
 	protected $imageName;
 	

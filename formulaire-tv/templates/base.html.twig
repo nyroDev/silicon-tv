@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700italic' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Podkova:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-		<link rel="stylesheet" href="{{ asset('build/skins/lightgray/skin.min.css') }}" >
-		<link rel="stylesheet" href="{{ asset('build/skins/lightgray/content.min.css') }}" >
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-		<header class="background-white">
-			<div class="container">
-				<a href="https://www.siliconcomte.fr/">< Retour sur le site Silicon Compté</a>
-			</div>
-		</header>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Welcome!{% endblock %}</title>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Podkova:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+	<link rel="stylesheet" href="{{ asset('build/skins/lightgray/skin.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('build/skins/lightgray/content.min.css') }}">
+	{% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="content">
 	
-		<section class="background-yellow">
-			<div class="container">
-				<h3>Formulaire d'inscription à la TV SiliconComté diffusé pendant l'évenement du 15/03</h3>
-			</div>
-		</section>
-		
-        {% block body %}{% endblock %}
-		
-		<footer class="background-blue footer">
-			<div class="container">
-				<ul class="list-unstyled list-inline">
-					<li><a href="https://www.siliconcomte.fr/mentions-legales/" class="sc-caps sc-link-darker">mentions
-							légales</a></li>
-					<li><a href="https://www.siliconcomte.fr/contact/" class="sc-caps sc-link-darker">contacts</a></li>
-					<li><a href="https://www.siliconcomte.fr/credits/" class="sc-caps sc-link-darker">crédits</a></li>
-				</ul>
-			</div>
-		</footer>
-		
-        {% block javascripts %}{% endblock %}
-    </body>
+	<header class="background-white">
+		<div class="container">
+			<a href="https://www.siliconcomte.fr/">< Retour sur le site Silicon Compté</a>
+		</div>
+	</header>
+	
+	<section class="background-yellow">
+		<div class="container">
+			<h3>Formulaire d'inscription à la TV SiliconComté diffusé pendant l'évenement du 15/03</h3>
+		</div>
+	</section>
+	
+	{% block body %}{% endblock %}
+</div>
+
+<footer class="background-blue footer">
+	<div class="container">
+		<ul class="list-unstyled list-inline">
+			<li><a href="https://www.siliconcomte.fr/mentions-legales/" class="sc-caps sc-link-darker">mentions
+					légales</a></li>
+			<li><a href="https://www.siliconcomte.fr/contact/" class="sc-caps sc-link-darker">contacts</a></li>
+			<li><a href="https://www.siliconcomte.fr/credits/" class="sc-caps sc-link-darker">crédits</a></li>
+		</ul>
+	</div>
+</footer>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

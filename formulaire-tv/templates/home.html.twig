@@ -6,22 +6,48 @@
 	<br>
 	<section class="background-white">
 		<div class="container">
+			
 			{{ form_start(form) }}
-			<div class="col-md-6">
-				{{ form_row(form.email) }}
-				{{ form_row(form.name) }}
-				{{ form_row(form.bio) }}
-				<p>Attention, l'image sera redimensionné dans un format carré.</p>
-				{{ form_row(form.imageFile) }}
+			<div class="row">
+				
+				<div class="col-md-6">
+					{{ form_row(form.email) }}
+					{{ form_row(form.name) }}
+					<b>Attention, l'image sera redimensionné dans un format carré.</b>
+					{{ form_row(form.imageFile) }}
+					{{ form_row(form.bio) }}
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						{{ form_label(form.url) }} (ex: https://<em>monsiteweb.fr/</em>)
+						{{ form_widget(form.url) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(form.facebook) }} (ex: https://www.facebook.com/<em>mapage</em>)
+						{{ form_widget(form.facebook) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(form.twitter) }} (ex: @<em>TWITTER</em>)
+						{{ form_widget(form.twitter) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(form.instagram) }} (ex: <em>mon_compteinstagram</em>)
+						{{ form_widget(form.instagram) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(form.linkedin) }} (ex: https://www.linkedin.com/in/<em>mapage</em>)
+						{{ form_widget(form.linkedin) }}
+					</div>
+				</div>
 			</div>
-			<div class="col-md-6">
-				{{ form_row(form.url) }}
-				{{ form_row(form.facebook) }}
-				{{ form_row(form.twitter) }}
-				{{ form_row(form.instagram) }}
-				{{ form_row(form.linkedin) }}
+			
+			<br>
+			
+			<div class="row">
+				<div class="col-md-12 text-center">
+				{{ form_end(form) }}
+				</div>
 			</div>
-			{{ form_end(form) }}
 		</div>
 	</section>
 {% endblock %}

@@ -38,11 +38,13 @@ class AppController extends Controller
 				],
 			])
 			->add('name', TextType::class, [
+				'label' => 'Nom prénom ou nom de l\'entreprise',
 				'label_attr' => [
 					'class' => 'required'
 				],
 			])
 			->add('imageFile', VichImageType::class, [
+				'label' => 'Image',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
 				'label_attr' => [
@@ -59,9 +61,11 @@ class AppController extends Controller
 				],
 			])
 			->add('url', UrlType::class, [
+				'label' => 'Lien vers le site',
 				'required' => false,
 			])
 			->add('facebook', UrlType::class, [
+				'label' => 'Facebook',
 				'required' => false,
 			])
 			->add('twitter', TextType::class, [

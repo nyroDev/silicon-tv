@@ -3,6 +3,9 @@ $silicon-darkyellow: #e2c200;
 $silicon-blue: #21bbef;
 $silicon-darkblue: #11b0e6;
 
+@import 'variables.scss';
+@import 'style.scss';
+
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/type';
@@ -42,6 +45,17 @@ header {
 	padding: 1em;
 }
 
+html {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+body {
+	min-height:100%;
+	position:relative;
+}
+
 footer {
 	position: absolute;
 	bottom: 0;
@@ -52,6 +66,10 @@ footer {
 	overflow: hidden;
 	font-size: 11px;
 	text-transform: uppercase;
+}
+
+.content {
+	padding-bottom: 4em;
 }
 
 .required::after {

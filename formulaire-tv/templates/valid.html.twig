@@ -16,17 +16,43 @@
 		<div class="row">
 			<div class="well col-md-8 col-md-offset-2">
 				<div class="thumbnail">
-					<img class="img-responsive col-md-4" src="{{ asset('/images/members/' ~ member.imageName) | imagine_filter('squared_thumbnail') }}"
+					<img class="img-responsive col-md-4"
+						 src="{{ asset('/images/members/' ~ member.imageName) | imagine_filter('squared_thumbnail') }}"
 						 alt="">
 					<div class="caption col-md-8">
-						<p class="media-heading">{{ member.name }}</p>
-						{{ member.bio | raw }}
+						<div class="row">
+							<p class="media-heading">
+								{{ member.name }}
+							</p>
+						</div>
+						<div class="row">
+							{{ member.bio | raw }}
+						</div>
+						
+						<br>
+						
 						<div>
-							{{ member.url }}
-							{{ member.facebook }}
-							{{ member.twitter }}
-							{{ member.instagram }}
-							{{ member.linkedin }}
+							<div class="row">
+								{{ member.url }}
+							</div>
+							
+							<br>
+							
+							<div class="row">
+								<span class="icon-envelope"></span> {{ member.email }}
+							</div>
+							<div class="row">
+								<span class="icon-facebook-official"></span> {{ member.facebook }}
+							</div>
+							<div class="row">
+								<span class="icon-twitter"></span> {{ member.twitter }}
+							</div>
+							<div class="row">
+								<span class="icon-instagram"></span> {{ member.instagram }}
+							</div>
+							<div class="row">
+								<span class="icon-linkedin"></span> {{ member.linkedin }}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -34,11 +60,15 @@
 			
 			<br>
 			
-			<a href="{{ path('delete') }}">
-				<button>Annuler</button>
-			</a>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<a href="{{ path('delete') }}">
+						<button class="btn btn-danger">Annuler</button>
+					</a>
+				</div>
+			</div>
 		</div>
-		
+	
 	</div>
 
 {% endblock %}

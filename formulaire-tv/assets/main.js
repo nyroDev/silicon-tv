@@ -7,7 +7,7 @@ window.tinymce.init({
   skin: false,
   theme: 'modern',
   content_style: 'body {font-family: Arial; font-size: 10pt;}',
-  height: 50,
+  height: 175,
   menubar: false,
   toolbar: [
     'bold',

@@ -11,13 +11,14 @@
 			<div class="row">
 				
 				<div class="col-md-6">
-					{{ form_row(form.email) }}
 					{{ form_row(form.name) }}
 					<b>Attention, l'image sera redimensionné dans un format carré.</b>
 					{{ form_row(form.imageFile) }}
 					{{ form_row(form.bio) }}
 				</div>
 				<div class="col-md-6">
+					{{ form_row(form.email) }}
+					
 					<div class="form-group">
 						{{ form_label(form.url) }} (ex: https://<em>monsiteweb.fr/</em>)
 						{{ form_widget(form.url) }}

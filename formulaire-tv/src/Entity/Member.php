@@ -5,10 +5,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @Vich\Uploadable
+ * @UniqueEntity("email")
  */
 class Member
 {
@@ -28,7 +30,7 @@ class Member
 	 * @Assert\Email(
 	 *     message = "L'email '{{ value }}' n'est pas une adresse email valide.",
 	 * )
-	 * @ORM\Column(name="email", type="string", length=255, nullable=false)
+	 * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
 	 */
 	protected $email;
 	

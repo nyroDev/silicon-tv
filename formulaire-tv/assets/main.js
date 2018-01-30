@@ -1,12 +1,13 @@
-import tinymce from 'tinymce/tinymce';
+import 'tinymce/tinymce';
 import 'tinymce/themes/modern/theme';
 
-tinymce.init({
+window.tinymce.init({
   selector: 'textarea',
+  extended_valid_elements: 'strong',
   skin: false,
   theme: 'modern',
   content_style: 'body {font-family: Arial; font-size: 10pt;}',
-  height: 300,
+  height: 50,
   menubar: false,
   toolbar: [
     'bold',

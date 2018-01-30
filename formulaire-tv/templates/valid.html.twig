@@ -3,6 +3,16 @@
 {% block body %}
 	<div class="container">
 		<br>
+		
+		<div class="row">
+			<div class="text-center">
+				<p>Merci, vos informations ont été correctement enregistrés. <b>RDV le 15 mars à la Rodia !</b></p>
+				<p>En cas d'erreur, veuillez contacter leograndcontact@gmail.com</p>
+			</div>
+		</div>
+		
+		<br>
+		
 		<div class="row">
 			<div class="well col-md-8 col-md-offset-2">
 				<div class="thumbnail">
@@ -21,11 +31,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="row">
-			<p>Merci, vos informations ont été correctement enregistrés. RDV le 15 mars à la Rodia !</p>
-			<p>En cas d'erreur, veuillez contacter leograndcontact@gmail.com</p>
+			
+			<br>
+			
+			<a href="{{ path('delete') }}">
+				<button>Annuler</button>
+			</a>
 		</div>
 		
 	</div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,6 +17,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AppController extends Controller
 {
@@ -30,33 +32,48 @@ class AppController extends Controller
 		$member = new Member();
 		
 		$form = $this->createFormBuilder($member)
-            ->add('email', EmailType::class)
-            ->add('name', TextType::class)
-            ->add('imageFile', VichImageType::class, [
-				'image_uri' => true,
-            	'imagine_pattern' => 'squared_thumbnail'
-			])
-            ->add('bio', TextareaType::class, [
-            	'attr' => [
-            		'class' => 'textarea'
+			->add('email', EmailType::class, [
+				'label_attr' => [
+					'class' => 'required'
 				],
 			])
-            ->add('url', UrlType::class, [
-				'required'   => false,
+			->add('name', TextType::class, [
+				'label_attr' => [
+					'class' => 'required'
+				],
 			])
-            ->add('facebook', UrlType::class, [
-				'required'   => false,
+			->add('imageFile', VichImageType::class, [
+				'image_uri' => true,
+				'imagine_pattern' => 'squared_thumbnail',
+				'label_attr' => [
+					'class' => 'required'
+				],
 			])
-            ->add('twitter', TextType::class, [
-				'required'   => false,
+			->add('bio', TextareaType::class, [
+				'label' => 'Description',
+				'attr' => [
+					'class' => 'textarea'
+				],
+				'label_attr' => [
+					'class' => 'required'
+				],
 			])
-            ->add('instagram', TextType::class, [
-				'required'   => false,
+			->add('url', UrlType::class, [
+				'required' => false,
 			])
-            ->add('linkedin', UrlType::class, [
-				'required'   => false,
+			->add('facebook', UrlType::class, [
+				'required' => false,
 			])
-            ->add('submit', SubmitType::class, ['label' => 'Envoyer'])
+			->add('twitter', TextType::class, [
+				'required' => false,
+			])
+			->add('instagram', TextType::class, [
+				'required' => false,
+			])
+			->add('linkedin', UrlType::class, [
+				'required' => false,
+			])
+			->add('submit', SubmitType::class, ['label' => 'Envoyer'])
 			->getForm();
 		
 		$form->handleRequest($request);
@@ -69,7 +86,12 @@ class AppController extends Controller
 			$em->persist($member);
 			$em->flush();
 			
-			return $this->redirectToRoute('valid', ['id' => $member->getId()]);
+			$session = new Session();
+			$session->start();
+			
+			$session->set('id', $member->getId());
+			
+			return $this->redirectToRoute('valid');
 		}
 		
 		return $this->render('home.html.twig', [
@@ -78,16 +100,45 @@ class AppController extends Controller
 	}
 	
 	/**
-	 * @Route("/valid/{id}", name="valid")
-	 * @param int $id
+	 * @Route("/valid", name="valid")
 	 * @return Response
 	 */
-	public function valid(int $id)
+	public function valid()
 	{
-		$member = $this->getDoctrine()->getRepository(Member::class)->find($id);
-		return $this->render('valid.html.twig', [
-			'member' => $member
-		]);
+		$session = new Session();
+		if ($session->get('id')) {
+			$id = $session->get('id');
+			$member = $this->getDoctrine()->getRepository(Member::class)->find($id);
+			if ($member) {
+				return $this->render('valid.html.twig', [
+					'member' => $member
+				]);
+			} else {
+				throw $this->createNotFoundException('Aucun membre');
+			}
+		}
+		throw $this->createNotFoundException('Aucun id');
+	}
+	
+	/**
+	 * @Route("/delete", name="delete")
+	 * @return Response
+	 */
+	public function delete()
+	{
+		$session = new Session();
+		if ($session->get('id')) {
+			$id = $session->get('id');
+			$member = $this->getDoctrine()->getRepository(Member::class)->find($id);
+			$em = $this->getDoctrine()->getManager();
+			
+			$em->remove($member);
+			$em->flush();
+			
+			return $this->redirectToRoute('home');
+		}
+		
+		throw $this->createNotFoundException('Aucun id');
 	}
 	
 	/**

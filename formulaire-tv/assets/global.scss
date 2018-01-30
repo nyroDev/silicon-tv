@@ -45,6 +45,16 @@ header {
 footer {
 	position: absolute;
 	bottom: 0;
-	height: 2em;
+	height: 4em;
 	margin-top: 5em;
+	width: 100%;
+	line-height: 4em;
+	overflow: hidden;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+.required::after {
+	content: '*';
+	color: red;
 }

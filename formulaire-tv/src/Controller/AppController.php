@@ -134,8 +134,6 @@ class AppController extends Controller
 	 */
 	public function delete()
 	{
-		throw $this->createNotFoundException('not available');
-
 		$session = new Session();
 		if ($session->get('id')) {
 			$id = $session->get('id');

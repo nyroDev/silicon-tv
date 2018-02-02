@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class AppController extends Controller
 {
-	
+
 	/**
 	 * @Route("/", name="home")
 	 * @param Request $request
@@ -30,7 +30,7 @@ class AppController extends Controller
 	public function home(Request $request)
 	{
 		$member = new Member();
-		
+
 		$form = $this->createFormBuilder($member)
 			->add('email', EmailType::class, [
 				'label_attr' => [
@@ -79,30 +79,34 @@ class AppController extends Controller
 			])
 			->add('submit', SubmitType::class, ['label' => 'Envoyer'])
 			->getForm();
-		
+
 		$form->handleRequest($request);
-		
+
 		if ($form->isSubmitted() && $form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
 			/** @var Member $member */
 			$member = $form->getData();
-			
+			// Clean HTML tags ciming from past into tinymce
+			$member->setBio(
+				preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', strip_tags($member->getBio(), '<p><strong><b>'))
+			);
+
 			$em->persist($member);
 			$em->flush();
-			
+
 			$session = new Session();
 			$session->start();
-			
+
 			$session->set('id', $member->getId());
-			
+
 			return $this->redirectToRoute('valid');
 		}
-		
+
 		return $this->render('home.html.twig', [
 			'form' => $form->createView()
 		]);
 	}
-	
+
 	/**
 	 * @Route("/valid", name="valid")
 	 * @return Response
@@ -123,7 +127,7 @@ class AppController extends Controller
 		}
 		throw $this->createNotFoundException('Aucun id');
 	}
-	
+
 	/**
 	 * @Route("/delete", name="delete")
 	 * @return Response
@@ -135,30 +139,32 @@ class AppController extends Controller
 			$id = $session->get('id');
 			$member = $this->getDoctrine()->getRepository(Member::class)->find($id);
 			$em = $this->getDoctrine()->getManager();
-			
+
 			$em->remove($member);
 			$em->flush();
-			
+
 			return $this->redirectToRoute('home');
 		}
-		
+
 		throw $this->createNotFoundException('Aucun id');
 	}
-	
+
 	/**
 	 * @Route("/dump", name="dump")
 	 * @return JsonResponse
 	 */
 	public function dump()
 	{
+		throw $this->createNotFoundException('not available');
+
 		$members = $this->getDoctrine()->getRepository(Member::class)->findAll();
 		$encoders = [new JsonEncoder()];
 		$normalizers = [new ObjectNormalizer()];
-		
+
 		$serializer = new Serializer($normalizers, $encoders);
 		$json = $serializer->serialize($members, 'json');
-		
+
 		return new JsonResponse($json, 200, [], true);
 	}
-	
+
 }

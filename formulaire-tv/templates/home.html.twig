@@ -6,11 +6,14 @@
 	<br>
 	<section class="background-white">
 		<div class="container">
-			<h4>Pour vous présenter, ces informations défileront, pour la journée uniquement, sur un écran à La Rodia. La photo facultative permettra de vous identifier si d'autres personnes souhaitent vous rencontrer (par exemple, pendant le buffet "business")</h4>
-			
+			<h4>
+				Pour vous présenter, ces informations défileront, pour la journée uniquement, sur un écran à La Rodia.<br />
+				La photo facultative permettra de vous identifier si d'autres personnes souhaitent vous rencontrer (par exemple, pendant le buffet "business")
+			</h4>
+
 			{{ form_start(form) }}
 			<div class="row">
-				
+
 				<div class="col-md-6">
 					{{ form_row(form.name) }}
 					<b>Attention, l'image sera redimensionné dans un format carré.</b>
@@ -20,7 +23,8 @@
 				</div>
 				<div class="col-md-6">
 					{{ form_row(form.email) }}
-					
+					{{ form_row(form.emailHidden) }}
+
 					<div class="form-group">
 						{{ form_label(form.url) }} (ex: https://<em>monsiteweb.fr/</em>)
 						{{ form_widget(form.url) }}
@@ -43,9 +47,9 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<br>
-			
+
 			<div class="row">
 				<div class="col-md-12 text-center">
 				{{ form_end(form) }}

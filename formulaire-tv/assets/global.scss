@@ -76,3 +76,22 @@ footer {
 	content: '*';
 	color: red;
 }
+
+#bioDesc {
+	position: relative;
+	height: 6em;
+	overflow: hidden;
+}
+#bioDesc:after {
+	content: '';
+	display: block;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 20px;
+	background: -moz-linear-gradient(top, rgba(240,240,240,0) 0%, rgba(240,240,240,1) 100%);
+	background: -webkit-linear-gradient(top, rgba(240,240,240,0) 0%,rgba(240,240,240,1) 100%);
+	background: linear-gradient(to bottom, rgba(240,240,240,0) 0%,rgba(240,240,240,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f0f0f0', endColorstr='#f0f0f0',GradientType=0 );
+}

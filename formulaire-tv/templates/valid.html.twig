@@ -7,19 +7,32 @@
 		<div class="row">
 			<div class="text-center">
 				<p>Merci, vos informations ont été correctement enregistrés. <b>RDV le 15 mars à la Rodia !</b></p>
-				<p>En cas d'erreur, veuillez contacter leograndcontact@gmail.com</p>
+				<p>En cas d'erreur, veuillez contacter <a href="mailto:contact@siliconcomte.fr">contact@siliconcomte.fr</a></p>
 			</div>
 		</div>
 		
 		<br>
 		
+		<h2 class="text-center">Résumé de vos informations</h2>
+		
 		<div class="row">
 			<div class="well col-md-8 col-md-offset-2">
-				<div class="thumbnail">
-					<img class="img-responsive col-md-4"
-						 src="{{ asset('/images/members/' ~ member.imageName) | imagine_filter('squared_thumbnail') }}"
-						 alt="">
-					<div class="caption col-md-8">
+				<div class="">
+					<div class="row">
+						{% if member.imageName is defined and member.imageName is not null %}
+						<img class="img-responsive col-md-4"
+							 src="{{ asset('/images/members/' ~ member.imageName) | imagine_filter('squared_thumbnail') }}"
+							 alt="">
+						{% endif %}
+						
+						{% if member.logoName is defined and member.logoName is not null %}
+						<img class="img-responsive col-md-4 pull-right"
+							 src="{{ asset('/images/members/' ~ member.logoName) | imagine_filter('squared_thumbnail') }}"
+							 alt="">
+						{% endif %}
+					</div>
+				</div>
+					<div class="caption text-center">
 						<div class="row">
 							<p class="media-heading">
 								{{ member.name }}
@@ -32,27 +45,43 @@
 						<br>
 						
 						<div>
+							{% if member.url is defined and member.url is not null %}
 							<div class="row">
 								{{ member.url }}
 							</div>
+							{% endif %}
 							
 							<br>
-							
+	
+							{% if member.email is defined and member.email is not null %}
 							<div class="row">
 								<span class="icon-envelope"></span> {{ member.email }}
 							</div>
+							{% endif %}
+	
+							{% if member.facebook is defined and member.facebook is not null %}
 							<div class="row">
 								<span class="icon-facebook-official"></span> {{ member.facebook }}
 							</div>
+							{% endif %}
+	
+							{% if member.twitter is defined and member.twitter is not null %}
 							<div class="row">
 								<span class="icon-twitter"></span> {{ member.twitter }}
 							</div>
+							{% endif %}
+							
+							{% if member.instagram is defined and member.instagram is not null %}
 							<div class="row">
 								<span class="icon-instagram"></span> {{ member.instagram }}
 							</div>
+							{% endif %}
+							
+							{% if member.linkedin is defined and member.linkedin is not null %}
 							<div class="row">
 								<span class="icon-linkedin"></span> {{ member.linkedin }}
 							</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>

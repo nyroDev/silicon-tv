@@ -39,7 +39,7 @@ class AppController extends Controller
 				'required' => false,
 			])
 			->add('name', TextType::class, [
-				'label' => 'Nom prénom ou nom de l\'entreprise',
+				'label' => 'Nom & prénom ou nom de l\'entreprise',
 				'label_attr' => [
 					'class' => 'required'
 				],
@@ -53,7 +53,7 @@ class AppController extends Controller
 				],
 			])
 			->add('imageFile', VichImageType::class, [
-				'label' => 'et/ou représentant',
+				'label' => 'et/ou du représentant/membre',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
 				'label_attr' => [
@@ -70,7 +70,7 @@ class AppController extends Controller
 				],
 			])
 			->add('url', UrlType::class, [
-				'label' => 'Lien vers le site',
+				'label' => 'Lien vers votre site',
 				'required' => false,
 			])
 			->add('facebook', UrlType::class, [

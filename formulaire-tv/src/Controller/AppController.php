@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,10 @@ class AppController extends Controller
 				'label_attr' => [
 					'class' => 'required'
 				],
+				'required' => true,
+			])
+			->add('emailHidden', CheckboxType::class, [
+				'label' => 'ne pas afficher mon email sur la TV',
 				'required' => false,
 			])
 			->add('name', TextType::class, [
@@ -48,15 +53,16 @@ class AppController extends Controller
 				'label' => 'Logo de l\'entreprise',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
-				'required' => false,
-			])
-			->add('imageFile', VichImageType::class, [
-				'label' => 'et/ou du représentant/membre',
-				'image_uri' => true,
-				'imagine_pattern' => 'squared_thumbnail',
 				'label_attr' => [
 					'class' => 'required'
 				],
+				'required' => true,
+			])
+			->add('imageFile', VichImageType::class, [
+				'label' => 'Photo de la personne qui vous représentera (facultatif)',
+				'image_uri' => true,
+				'imagine_pattern' => 'squared_thumbnail',
+				'required' => false,
 			])
 			->add('bio', TextareaType::class, [
 				'label' => 'Décrivez brièvement votre activité',

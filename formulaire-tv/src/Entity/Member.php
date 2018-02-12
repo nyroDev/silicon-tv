@@ -22,7 +22,7 @@ class Member
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	protected $id;
-	
+
 	/**
 	 * @var string
 	 *
@@ -33,7 +33,14 @@ class Member
 	 * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
 	 */
 	protected $email;
-	
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
+	 */
+	protected $emailHidden = false;
+
 	/**
 	 * @var string
 	 *
@@ -42,7 +49,7 @@ class Member
 	 * @ORM\Column(name="name", type="string", length=200, nullable=false)
 	 */
 	protected $name;
-	
+
 	/**
 	 * @var File
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -51,51 +58,50 @@ class Member
 	 * @Vich\UploadableField(mapping="logo", fileNameProperty="logoName", size="logoSize")
 	 */
 	protected $logoFile;
-	
+
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="string", length=255, nullable=false)
 	 */
 	protected $logoName;
-	
+
 	/**
 	 * @var integer
 	 *
 	 * @ORM\Column(type="integer")
 	 */
 	protected $logoSize;
-	
+
 	/**
 	 * @var File
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
-	 * @Assert\NotBlank()
 	 * @Vich\UploadableField(mapping="image", fileNameProperty="imageName", size="imageSize")
 	 */
 	protected $imageFile;
-	
+
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=255, nullable=false)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	protected $imageName;
-	
+
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="integer", nullable=true)
 	 */
 	protected $imageSize;
-	
+
 	/**
 	 * @var \DateTime
 	 *
 	 * @ORM\Column(type="datetime")
 	 */
 	protected $updatedAt;
-	
+
 	/**
 	 * @var string
 	 *
@@ -104,7 +110,7 @@ class Member
 	 * @ORM\Column(type="text")
 	 */
 	protected $bio;
-	
+
 	/**
 	 * @var string
 	 *
@@ -114,7 +120,7 @@ class Member
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $url;
-	
+
 	/**
 	 * @var string
 	 *
@@ -126,7 +132,7 @@ class Member
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $facebook;
-	
+
 	/**
 	 * @var string
 	 *
@@ -135,7 +141,7 @@ class Member
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $twitter;
-	
+
 	/**
 	 * @var string
 	 *
@@ -143,7 +149,7 @@ class Member
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $instagram;
-	
+
 	/**
 	 * @var string
 	 *
@@ -155,14 +161,14 @@ class Member
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $linkedin;
-	
+
 	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean", nullable=false, options={"default"=true})
 	 */
 	protected $valid = true;
-	
+
 	/**
 	 * Get id
 	 *
@@ -172,7 +178,7 @@ class Member
 	{
 		return $this->id;
 	}
-	
+
 	/**
 	 * Get email
 	 *
@@ -182,7 +188,7 @@ class Member
 	{
 		return $this->email;
 	}
-	
+
 	/**
 	 * Set email
 	 *
@@ -192,10 +198,33 @@ class Member
 	public function setEmail($email)
 	{
 		$this->email = $email;
-		
+
 		return $this;
 	}
-	
+
+	/**
+	 * Get if email should be Hidden
+	 *
+	 * @return boolean
+	 */
+	public function getEmailHidden()
+	{
+		return $this->emailHidden;
+	}
+
+	/**
+	 * Set if email should be Hidden
+	 *
+	 * @param $emailHidden
+	 * @return Member
+	 */
+	public function setEmailHidden($emailHidden)
+	{
+		$this->emailHidden = $emailHidden;
+
+		return $this;
+	}
+
 	/**
 	 * Get name
 	 *
@@ -205,7 +234,7 @@ class Member
 	{
 		return $this->name;
 	}
-	
+
 	/**
 	 * Set name
 	 *
@@ -215,10 +244,10 @@ class Member
 	public function setName($name)
 	{
 		$this->name = $name;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
 	 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
@@ -231,14 +260,14 @@ class Member
 	public function setLogoFile(?File $logo = null): void
 	{
 		$this->logoFile = $logo;
-		
+
 		if (null !== $logo) {
 			// It is required that at least one field changes if you are using doctrine
 			// otherwise the event listeners won't be called and the file is lost
 			$this->updatedAt = new \DateTimeImmutable();
 		}
 	}
-	
+
 	/**
 	 * Get logoFile
 	 *
@@ -248,7 +277,7 @@ class Member
 	{
 		return $this->logoFile;
 	}
-	
+
 	/**
 	 * Set logoName
 	 *
@@ -258,10 +287,10 @@ class Member
 	public function setLogoName($logoName)
 	{
 		$this->logoName = $logoName;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get logoName
 	 *
@@ -271,7 +300,7 @@ class Member
 	{
 		return $this->logoName;
 	}
-	
+
 	/**
 	 * Set logoSize
 	 *
@@ -281,10 +310,10 @@ class Member
 	public function setLogoSize($logoSize)
 	{
 		$this->logoSize = $logoSize;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get logoSize
 	 *
@@ -294,7 +323,7 @@ class Member
 	{
 		return $this->logoSize;
 	}
-	
+
 	/**
 	 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
 	 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
@@ -307,14 +336,14 @@ class Member
 	public function setImageFile(?File $image = null): void
 	{
 		$this->imageFile = $image;
-		
+
 		if (null !== $image) {
 			// It is required that at least one field changes if you are using doctrine
 			// otherwise the event listeners won't be called and the file is lost
 			$this->updatedAt = new \DateTimeImmutable();
 		}
 	}
-	
+
 	/**
 	 * Get imageFile
 	 *
@@ -324,7 +353,7 @@ class Member
 	{
 		return $this->imageFile;
 	}
-	
+
 	/**
 	 * Set imageName
 	 *
@@ -334,10 +363,10 @@ class Member
 	public function setImageName($imageName)
 	{
 		$this->imageName = $imageName;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get imageName
 	 *
@@ -347,7 +376,7 @@ class Member
 	{
 		return $this->imageName;
 	}
-	
+
 	/**
 	 * Set imageSize
 	 *
@@ -357,10 +386,10 @@ class Member
 	public function setImageSize($imageSize)
 	{
 		$this->imageSize = $imageSize;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get imageSize
 	 *
@@ -370,7 +399,7 @@ class Member
 	{
 		return $this->imageSize;
 	}
-	
+
 	/**
 	 * Get bio
 	 *
@@ -380,7 +409,7 @@ class Member
 	{
 		return $this->bio;
 	}
-	
+
 	/**
 	 * Set bio
 	 *
@@ -390,10 +419,10 @@ class Member
 	public function setBio($bio)
 	{
 		$this->bio = $bio;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get url
 	 *
@@ -403,7 +432,7 @@ class Member
 	{
 		return $this->url;
 	}
-	
+
 	/**
 	 * Set url
 	 *
@@ -413,10 +442,10 @@ class Member
 	public function setUrl($url)
 	{
 		$this->url = $url;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get facebook
 	 *
@@ -426,7 +455,7 @@ class Member
 	{
 		return $this->facebook;
 	}
-	
+
 	/**
 	 * Set facebook
 	 *
@@ -436,10 +465,10 @@ class Member
 	public function setFacebook($facebook)
 	{
 		$this->facebook = $facebook;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get twitter
 	 *
@@ -449,7 +478,7 @@ class Member
 	{
 		return $this->twitter;
 	}
-	
+
 	/**
 	 * Set twitter
 	 *
@@ -459,10 +488,10 @@ class Member
 	public function setTwitter($twitter)
 	{
 		$this->twitter = $twitter;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get instagram
 	 *
@@ -472,7 +501,7 @@ class Member
 	{
 		return $this->instagram;
 	}
-	
+
 	/**
 	 * Set instagram
 	 *
@@ -482,10 +511,10 @@ class Member
 	public function setInstagram($instagram)
 	{
 		$this->instagram = $instagram;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get linkedin
 	 *
@@ -495,7 +524,7 @@ class Member
 	{
 		return $this->linkedin;
 	}
-	
+
 	/**
 	 * Set linkedin
 	 *
@@ -505,10 +534,10 @@ class Member
 	public function setLinkedin($linkedin)
 	{
 		$this->linkedin = $linkedin;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get if member is valid
 	 *
@@ -518,7 +547,7 @@ class Member
 	{
 		return $this->valid;
 	}
-	
+
 	/**
 	 * Set a member valid
 	 *
@@ -528,7 +557,7 @@ class Member
 	public function setValid($valid)
 	{
 		$this->valid = $valid;
-		
+
 		return $this;
 	}
 }

@@ -48,7 +48,30 @@ class Member
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
 	 * @Assert\NotBlank()
-	 * @Vich\UploadableField(mapping="logo", fileNameProperty="imageName", size="imageSize")
+	 * @Vich\UploadableField(mapping="logo", fileNameProperty="logoName", size="logoSize")
+	 */
+	protected $logoFile;
+	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=255, nullable=false)
+	 */
+	protected $logoName;
+	
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	protected $logoSize;
+	
+	/**
+	 * @var File
+	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
+	 *
+	 * @Assert\NotBlank()
+	 * @Vich\UploadableField(mapping="image", fileNameProperty="imageName", size="imageSize")
 	 */
 	protected $imageFile;
 	
@@ -203,9 +226,85 @@ class Member
 	 * must be able to accept an instance of 'File' as the bundle will inject one here
 	 * during Doctrine hydration.
 	 *
+	 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $logo
+	 */
+	public function setLogoFile(?File $logo = null): void
+	{
+		$this->logoFile = $logo;
+		
+		if (null !== $logo) {
+			// It is required that at least one field changes if you are using doctrine
+			// otherwise the event listeners won't be called and the file is lost
+			$this->updatedAt = new \DateTimeImmutable();
+		}
+	}
+	
+	/**
+	 * Get logoFile
+	 *
+	 * @return string
+	 */
+	public function getLogoFile()
+	{
+		return $this->logoFile;
+	}
+	
+	/**
+	 * Set logoName
+	 *
+	 * @param $logoName
+	 * @return Member
+	 */
+	public function setLogoName($logoName)
+	{
+		$this->logoName = $logoName;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get logoName
+	 *
+	 * @return string
+	 */
+	public function getLogoName()
+	{
+		return $this->logoName;
+	}
+	
+	/**
+	 * Set logoSize
+	 *
+	 * @param $logoSize
+	 * @return Member
+	 */
+	public function setLogoSize($logoSize)
+	{
+		$this->logoSize = $logoSize;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get logoSize
+	 *
+	 * @return int
+	 */
+	public function getLogoSize()
+	{
+		return $this->logoSize;
+	}
+	
+	/**
+	 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+	 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+	 * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+	 * must be able to accept an instance of 'File' as the bundle will inject one here
+	 * during Doctrine hydration.
+	 *
 	 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
 	 */
-	public function setImageFile($image = null)
+	public function setImageFile(?File $image = null): void
 	{
 		$this->imageFile = $image;
 		

@@ -36,6 +36,7 @@ class AppController extends Controller
 				'label_attr' => [
 					'class' => 'required'
 				],
+				'required' => false,
 			])
 			->add('name', TextType::class, [
 				'label' => 'Nom prénom ou nom de l\'entreprise',
@@ -43,8 +44,16 @@ class AppController extends Controller
 					'class' => 'required'
 				],
 			])
+			->add('logoFile', VichImageType::class, [
+				'label' => 'Logo de l\'entreprise',
+				'image_uri' => true,
+				'imagine_pattern' => 'squared_thumbnail',
+				'label_attr' => [
+					'class' => 'required'
+				],
+			])
 			->add('imageFile', VichImageType::class, [
-				'label' => 'Image',
+				'label' => 'et/ou représentant',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
 				'label_attr' => [
@@ -52,7 +61,7 @@ class AppController extends Controller
 				],
 			])
 			->add('bio', TextareaType::class, [
-				'label' => 'Description',
+				'label' => 'Décrivez brièvement votre activité',
 				'attr' => [
 					'class' => 'textarea'
 				],

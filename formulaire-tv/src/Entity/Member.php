@@ -128,7 +128,10 @@ class Member
 	 *    message = "L'url '{{ value }}' n'est pas une URL valide",
 	 *    protocols = {"http", "https"}
 	 * )
-	 * @Assert\Regex("/facebook/")
+	 * @Assert\Regex(
+	 *   pattern="/facebook/",
+	 *   message="Url facebook invalide"
+	 * )
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $facebook;
@@ -137,7 +140,10 @@ class Member
 	 * @var string
 	 *
 	 * @Assert\Type("string")
-	 * @Assert\Regex("/@/")
+	 * @Assert\Regex(
+	 *	 pattern="/@/",
+	 *   message="Votre compte Twitter doit être au format: @MONCOMTE"
+	 * )
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $twitter;
@@ -157,7 +163,10 @@ class Member
 	 *    message = "L'url '{{ value }}' n'est pas une URL valide",
 	 *    protocols = {"http", "https"}
 	 * )
-	 * @Assert\Regex("/linkedin\.com/")
+	 * @Assert\Regex(
+	 *   pattern="/linkedin\.com/",
+	 *   message="Url linkedin invalide"
+	 * )
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	protected $linkedin;

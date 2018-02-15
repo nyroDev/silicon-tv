@@ -56,7 +56,7 @@ class AppController extends Controller
 				'label_attr' => [
 					'class' => 'required'
 				],
-				'required' => true,
+				'required' => false,
 			])
 			->add('imageFile', VichImageType::class, [
 				'label' => 'Photo de la personne qui vous représentera (facultatif)',

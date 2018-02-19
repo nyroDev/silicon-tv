@@ -53,10 +53,7 @@ class AppController extends Controller
 				'label' => 'Logo de l\'entreprise',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
-				'label_attr' => [
-					'class' => 'required'
-				],
-				'required' => true,
+				'required' => false,
 			])
 			->add('imageFile', VichImageType::class, [
 				'label' => 'Photo de la personne qui vous représentera',

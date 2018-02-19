@@ -52,8 +52,8 @@
 							{% endif %}
 
 							<br>
-
-							{% if member.email is defined and member.email is not null %}
+							
+							{% if member.email is defined and member.email is not null and member.emailHidden == false %}
 							<div class="row">
 								<span class="icon-envelope"></span> {{ member.email }}
 							</div>

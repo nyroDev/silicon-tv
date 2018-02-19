@@ -27,22 +27,27 @@
 
 					<div class="form-group">
 						{{ form_label(form.url) }} (ex: https://<em>monsiteweb.fr/</em>)
+						{{ form_errors(form.url) }}
 						{{ form_widget(form.url) }}
 					</div>
 					<div class="form-group">
 						{{ form_label(form.facebook) }} (ex: https://www.facebook.com/<em>mapage</em>)
+						{{ form_errors(form.facebook) }}
 						{{ form_widget(form.facebook) }}
 					</div>
 					<div class="form-group">
 						{{ form_label(form.twitter) }} (ex: @<em>TWITTER</em>)
+						{{ form_errors(form.twitter) }}
 						{{ form_widget(form.twitter) }}
 					</div>
 					<div class="form-group">
 						{{ form_label(form.instagram) }} (ex: <em>mon_compteinstagram</em>)
+						{{ form_errors(form.instagram) }}
 						{{ form_widget(form.instagram) }}
 					</div>
 					<div class="form-group">
 						{{ form_label(form.linkedin) }} (ex: https://www.linkedin.com/in/<em>mapage</em>)
+						{{ form_errors(form.linkedin) }}
 						{{ form_widget(form.linkedin) }}
 					</div>
 				</div>

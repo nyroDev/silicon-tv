@@ -59,7 +59,7 @@ class AppController extends Controller
 				'required' => true,
 			])
 			->add('imageFile', VichImageType::class, [
-				'label' => 'Photo de la personne qui vous représentera (facultatif)',
+				'label' => 'Photo de la personne qui vous représentera',
 				'image_uri' => true,
 				'imagine_pattern' => 'squared_thumbnail',
 				'required' => false,

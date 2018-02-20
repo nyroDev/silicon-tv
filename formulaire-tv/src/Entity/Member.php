@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -54,7 +55,6 @@ class Member
 	 * @var File
 	 * NOTE: This is not a mapped field of entity metadata, just a simple property.
 	 *
-	 * @Assert\NotBlank()
 	 * @Vich\UploadableField(mapping="logo", fileNameProperty="logoName", size="logoSize")
 	 */
 	protected $logoFile;
@@ -569,4 +569,17 @@ class Member
 
 		return $this;
 	}
+
+	/**
+     * @Assert\Callback
+     */
+	public function checkImageOrLogo(ExecutionContextInterface $context)
+	{
+		if (!$this->getLogoFile() && !$this->getImageFile()) {
+			$context->buildViolation('Veuillez ajouter au moins un logo ou une photo.')
+				->atPath('logoFile')
+				->addViolation();
+		}
+	}
+
 }

@@ -18,8 +18,31 @@ window.tinymce.init({
     editor.on('change', function () {
       editor.save();
     });
-  },
-  max_chars: 250
+    editor.on('keyup', function (element) {
+      console.log(element);
+      var count = CountCharacters();
+      document.getElementById("character_count").innerHTML = "Characters: " + count;
+    });
+  }
 });
 
-document.getElementsByTagName('form')[0].onsubmit = tinyMCE.triggerSave();
+function CountCharacters() {
+  var body = tinymce.get("txtTinyMCE").getBody();
+  var content = tinymce.trim(body.innerText || body.textContent);
+  return content.length;
+}
+
+function ValidateCharacterLength() {
+  var max = 20;
+  var count = CountCharacters();
+  if (count > max) {
+    alert("Maximum " + max + " characters allowed.")
+    return false;
+  }
+  return;
+}
+
+document.getElementsByTagName('form')[0].onsubmit = function() {
+  tinyMCE.triggerSave();
+  ValidateCharacterLength();
+};

@@ -18,7 +18,8 @@ window.tinymce.init({
     editor.on('change', function () {
       editor.save();
     });
-  }
+  },
+  max_chars: 250
 });
 
 document.getElementsByTagName('form')[0].onsubmit = tinyMCE.triggerSave();

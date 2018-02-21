@@ -107,7 +107,7 @@ class Member
 	 *
 	 * @Assert\NotBlank()
 	 * @Assert\Type("string")
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", length=250)
 	 */
 	protected $bio;
 

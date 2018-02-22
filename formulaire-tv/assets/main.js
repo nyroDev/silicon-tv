@@ -20,7 +20,7 @@ window.tinymce.init({
     editor.on('change', function () {
       editor.save();
     });
-    editor.on('keyup', function (editor) {
+    editor.on('keypress keyup change', function (editor) {
       var body = editor.getBody(),
         content = tinymce.trim(body.innerText || body.textContent),
         length = content.length,
@@ -29,7 +29,7 @@ window.tinymce.init({
       if (rest > 0) {
         charsLeft.innerText = ' - '+rest+' restants.';
       } else {
-        charsLeft.innerText = ' - Vous dépassez le nombre maxi.';
+        charsLeft.innerText = ' - <br /><strong>Vous dépassez le nombre maximum autorisé.</strong>';
       }
 
       editor.save();

@@ -21,28 +21,36 @@ window.tinymce.init({
     editor.on('keyup', function (element) {
       console.log(element);
       var count = CountCharacters();
-      document.getElementById("character_count").innerHTML = "Characters: " + count;
+      var counterdiv = document.getElementById('count_char');
+      if(counterdiv) {
+        counterdiv.innerText = 'Caractères: ' + count;
+      } else {
+        var div = document.createElement("div");
+        div.id = 'count_char';
+        div.className += 'mce-container mce-flow-layout-item mce-last mce-btn-group pull-right';
+        div.appendChild(document.createTextNode('Characters: ' + count));
+        document.getElementById("mceu_4-body").appendChild(div);
+      }
     });
   }
 });
 
 function CountCharacters() {
-  var body = tinymce.get("txtTinyMCE").getBody();
+  var body = tinymce.activeEditor.getBody();
   var content = tinymce.trim(body.innerText || body.textContent);
   return content.length;
 }
 
-function ValidateCharacterLength() {
-  var max = 20;
+function ValidateCharacterLength(element) {
+  var max = 250;
   var count = CountCharacters();
   if (count > max) {
-    alert("Maximum " + max + " characters allowed.")
-    return false;
+    alert("Limite de " + max + " caractères dépassé.");
+    return element.preventDefault();
   }
-  return;
 }
 
-document.getElementsByTagName('form')[0].onsubmit = function() {
+document.getElementsByTagName('form')[0].onsubmit = function(element) {
   tinyMCE.triggerSave();
-  ValidateCharacterLength();
+  ValidateCharacterLength(element);
 };

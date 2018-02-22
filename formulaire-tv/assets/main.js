@@ -20,7 +20,7 @@ window.tinymce.init({
     editor.on('change', function () {
       editor.save();
     });
-    editor.on('keypress keyup change', function (editor) {
+    editor.on('keypress keyup change', function () {
       var body = editor.getBody(),
         content = tinymce.trim(body.innerText || body.textContent),
         length = content.length,

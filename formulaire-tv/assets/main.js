@@ -1,6 +1,8 @@
 import 'tinymce/tinymce';
 import 'tinymce/themes/modern/theme';
 
+var charsLeft = document.getElementById('charsLeft');
+
 window.tinymce.init({
   selector: 'textarea',
   extended_valid_elements: 'strong',
@@ -18,31 +20,19 @@ window.tinymce.init({
     editor.on('change', function () {
       editor.save();
     });
-    editor.on('keyup', function (element) {
-      console.log(element);
-      var count = CountCharacters();
-      document.getElementById("character_count").innerHTML = "Characters: " + count;
+    editor.on('keyup', function (editor) {
+      var body = editor.getBody(),
+        content = tinymce.trim(body.innerText || body.textContent),
+        length = content.length,
+        rest = 250 - length;
+
+      if (rest > 0) {
+        charsLeft.innerText = ' - '+rest+' restants.';
+      } else {
+        charsLeft.innerText = ' - Vous dépassez le nombre maxi.';
+      }
+
+      editor.save();
     });
   }
 });
-
-function CountCharacters() {
-  var body = tinymce.get("txtTinyMCE").getBody();
-  var content = tinymce.trim(body.innerText || body.textContent);
-  return content.length;
-}
-
-function ValidateCharacterLength() {
-  var max = 20;
-  var count = CountCharacters();
-  if (count > max) {
-    alert("Maximum " + max + " characters allowed.")
-    return false;
-  }
-  return;
-}
-
-document.getElementsByTagName('form')[0].onsubmit = function() {
-  tinyMCE.triggerSave();
-  ValidateCharacterLength();
-};

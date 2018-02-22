@@ -45,12 +45,12 @@ function ValidateCharacterLength(element) {
   var max = 250;
   var count = CountCharacters();
   if (count > max) {
-    alert("Limite de " + max + " caractères dépassé.");
+    alert("Limite de " + max + " caractères dépassée.");
     return element.preventDefault();
   }
 }
 
 document.getElementsByTagName('form')[0].onsubmit = function(element) {
   tinyMCE.triggerSave();
-  ValidateCharacterLength(element);
+  //ValidateCharacterLength(element);
 };

@@ -29,7 +29,7 @@ window.tinymce.init({
       if (rest > 0) {
         charsLeft.innerHTML = ' - '+rest+' restants.';
       } else {
-        charsLeft.innerHTML = ' - <br /><strong>Vous dépassez le nombre maximum autorisé.</strong>';
+        charsLeft.innerHTML = ' - <br /><strong>Vous dépassez le nombre maximum autorisé, '+(-1 * rest)+' de trop.</strong>';
       }
 
       editor.save();

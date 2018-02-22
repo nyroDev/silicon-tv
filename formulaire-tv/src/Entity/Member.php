@@ -568,10 +568,11 @@ class Member
 
 		return $this;
 	}
-
+	
 	/**
-     * @Assert\Callback
-     */
+	 * @Assert\Callback
+	 * @param ExecutionContextInterface $context
+	 */
 	public function checkImageOrLogo(ExecutionContextInterface $context)
 	{
 		if (!$this->getLogoFile() && !$this->getImageFile()) {
@@ -579,6 +580,7 @@ class Member
 				->atPath('logoFile')
 				->addViolation();
 		}
+
 		$lenBio = mb_strlen(strip_tags($this->getBio()));
 		if ($lenBio > 250) {
 			$context->buildViolation('Veuillez ne pas dépasser 250 caractères.')

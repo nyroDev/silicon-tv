@@ -107,7 +107,7 @@ class Member
 	 *
 	 * @Assert\NotBlank()
 	 * @Assert\Type("string")
-	 * @ORM\Column(type="text", length=250)
+	 * @ORM\Column(type="text")
 	 */
 	protected $bio;
 
@@ -569,15 +569,22 @@ class Member
 
 		return $this;
 	}
-
+	
 	/**
-     * @Assert\Callback
-     */
+	 * @Assert\Callback
+	 * @param ExecutionContextInterface $context
+	 */
 	public function checkImageOrLogo(ExecutionContextInterface $context)
 	{
 		if (!$this->getLogoFile() && !$this->getImageFile()) {
 			$context->buildViolation('Veuillez ajouter au moins un logo ou une photo.')
 				->atPath('logoFile')
+				->addViolation();
+		}
+		
+		if(strlen(strip_tags($this->getBio())) > 250) {
+			$context->buildViolation('Limite de 250 caractères dépassée.')
+				->atPath('bio')
 				->addViolation();
 		}
 	}

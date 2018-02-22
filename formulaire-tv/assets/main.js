@@ -27,9 +27,9 @@ window.tinymce.init({
         rest = 250 - length;
 
       if (rest > 0) {
-        charsLeft.innerText = ' - '+rest+' restants.';
+        charsLeft.innerHTML = ' - '+rest+' restants.';
       } else {
-        charsLeft.innerText = ' - <br /><strong>Vous dépassez le nombre maximum autorisé.</strong>';
+        charsLeft.innerHTML = ' - <br /><strong>Vous dépassez le nombre maximum autorisé.</strong>';
       }
 
       editor.save();

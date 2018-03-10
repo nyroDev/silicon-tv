@@ -21,6 +21,10 @@ body {
 }
 a {
 	color: $silicon-darkblue;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 article {
   position: absolute;
@@ -42,6 +46,7 @@ article h1 {
 }
 .content {
   overflow: hidden;
+  height: 81vh;
   margin: 2vh;
 }
 .images {
@@ -65,6 +70,11 @@ article h1 {
 .bio > p:first-child {
     margin-top: 0;
 }
+.contact .row {
+  margin-bottom: 1.5rem;
+}
 .contact span {
+  position: relative;
+  top: 5px;
   color: $silicon-darkblue;
 }

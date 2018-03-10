@@ -44,7 +44,7 @@
 
 					{% if member.twitter %}
 						<div class="row">
-							<span class="icon-twitter"></span> <a href="https://twitter.com/{{ member.twitter }}" class="twitter" target="_blank">{{ member.twitter }}</a>
+							<span class="icon-twitter"></span> <a href="https://twitter.com/{{ member.twitter[1:] }}" class="twitter" target="_blank">{{ member.twitter }}</a>
 						</div>
 					{% endif %}
 

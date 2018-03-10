@@ -25,16 +25,16 @@
 				{% endif %}
 			</div>
 			<div class="infos">
-				<div class="bio">{{ member.bio }}</div>
+				<div class="bio">{{ member.bio|raw }}</div>
 				<div class="contact">
+					{% if member.url %}
+						<div class="row">
+							<span class="icon-link"></span> <a href="{{ member.url }}" class="url" target="_blank">{{ member.url }}</a>
+						</div>
+					{% endif %}
 					{% if not member.emailHidden %}
 						<div class="row">
 							<span class="icon-envelope"></span> <a href="mailto:{{ member.email }}" class="email">{{ member.email }}</a>
-						</div>
-					{% endif %}
-					{% if member.url %}
-						<div class="row">
-							<span class="icon-envelope"></span> <a href="{{ member.url }}" class="url" target="_blank">{{ member.url }}</a>
 						</div>
 					{% endif %}
 					{% if member.facebook %}

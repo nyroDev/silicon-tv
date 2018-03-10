@@ -105,6 +105,7 @@ class Member
 	/**
 	 * @var string
 	 *
+	 * @ORM\Column(type="text")
 	 * @Assert\NotBlank()
 	 * @Assert\Type("string")
 	 */

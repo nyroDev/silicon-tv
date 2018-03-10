@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('#{$icomoon-font-path}/icomoon.eot?1kq3rr');
-  src:  url('#{$icomoon-font-path}/icomoon.eot?1kq3rr#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/icomoon.ttf?1kq3rr') format('truetype'),
-    url('#{$icomoon-font-path}/icomoon.woff?1kq3rr') format('woff'),
-    url('#{$icomoon-font-path}/icomoon.svg?1kq3rr#icomoon') format('svg');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?uaj3wm');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?uaj3wm#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/icomoon.ttf?uaj3wm') format('truetype'),
+    url('#{$icomoon-font-path}/icomoon.woff?uaj3wm') format('woff'),
+    url('#{$icomoon-font-path}/icomoon.svg?uaj3wm#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,34 +26,43 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@function unicode($str) {
+  @return unquote("\"") + $str + unquote("\"");
+}
+
 .icon-envelope-o {
   &:before {
-    content: $icon-envelope-o;
+    content: unicode($icon-envelope-o); 
   }
 }
 .icon-envelope {
   &:before {
-    content: $icon-envelope;
+    content: unicode($icon-envelope); 
+  }
+}
+.icon-link {
+  &:before {
+    content: unicode($icon-link); 
+  }
+}
+.icon-facebook2 {
+  &:before {
+    content: unicode($icon-facebook2); 
   }
 }
 .icon-instagram {
   &:before {
-    content: $icon-instagram;
+    content: unicode($icon-instagram); 
   }
 }
 .icon-twitter {
   &:before {
-    content: $icon-twitter;
+    content: unicode($icon-twitter); 
   }
 }
 .icon-linkedin {
   &:before {
-    content: $icon-linkedin;
-  }
-}
-.icon-facebook-official {
-  &:before {
-    content: $icon-facebook-official;
+    content: unicode($icon-linkedin); 
   }
 }
 

@@ -65,10 +65,9 @@ article h1 {
   padding: 1vw;
 }
 .bio {
+  overflow: hidden;
   height: 40vh;
-}
-.bio > p {
-    width: 85vw;
+  width: 60vw;
 }
 .contact .row {
   margin-bottom: 1.5rem;

@@ -16,6 +16,9 @@ Encore
     .addEntry('js/main', './assets/main.js')
     .addStyleEntry('css/app', './assets/global.scss')
 
+    .addEntry('js/screen', './assets/screen.js')
+    .addStyleEntry('css/screen', './assets/screen.scss')
+
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {
       resolveUrlLoader: false

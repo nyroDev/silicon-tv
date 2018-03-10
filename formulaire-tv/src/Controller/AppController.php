@@ -177,4 +177,17 @@ class AppController extends Controller
 		return new JsonResponse($json, 200, [], true);
 	}
 
+
+	/**
+	 * @Route("/screen", name="screen")
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function screen(Request $request)
+	{
+		return $this->render('screen.html.twig', [
+			'members' => $this->getDoctrine()->getRepository(Member::class)->findAll()
+		]);
+	}
+
 }

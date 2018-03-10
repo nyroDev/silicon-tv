@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>La SiliconComté!</title>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Podkova:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ asset('build/css/screen.css') }}">
+	<link rel="stylesheet" href="http://localhost/lab/silicon-tv/formulaire-tv/public/build/css/screen.d94296aa14f79b25e20b5638c9c34808.css">
+</head>
+<body>
+<main>
+	{% for member in members %}
+	<article id="member_{{member.id}}">
+		<h1>{{member.name}}</h1>
+
+		<div class="content">
+			<div class="images">
+				{% if member.logoName %}
+					<img class="logo" src="{{ asset('/images/members/' ~ member.logoName) | imagine_filter('squared_image') }}" alt="{{member.name}}" />
+				{% endif %}
+				{% if member.imageName %}
+					<img class="image" src="{{ asset('/images/members/' ~ member.imageName) | imagine_filter('squared_image') }}" alt="{{member.name}}" />
+				{% endif %}
+			</div>
+			<div class="infos">
+				<div class="bio">{{ member.bio }}</div>
+				<div class="contact">
+					{% if not member.emailHidden %}
+						<div class="row">
+							<span class="icon-envelope"></span> <a href="mailto:{{ member.email }}" class="email">{{ member.email }}</a>
+						</div>
+					{% endif %}
+					{% if member.url %}
+						<div class="row">
+							<span class="icon-envelope"></span> <a href="{{ member.url }}" class="url" target="_blank">{{ member.url }}</a>
+						</div>
+					{% endif %}
+					{% if member.facebook %}
+						<div class="row">
+							<span class="icon-facebook-official"></span> <a href="{{ member.facebook }}" class="facebook" target="_blank">{{ member.facebook }}</a>
+						</div>
+					{% endif %}
+
+					{% if member.twitter %}
+						<div class="row">
+							<span class="icon-twitter"></span> <a href="https://twitter.com/{{ member.twitter }}" class="twitter" target="_blank">{{ member.twitter }}</a>
+						</div>
+					{% endif %}
+
+					{% if member.instagram  %}
+						<div class="row">
+							<span class="icon-instagram"></span> <a href="https://www.instagram.com/{{ member.instagram }}" class="instagram" target="_blank">{{ member.instagram }}</a>
+						</div>
+					{% endif %}
+
+					{% if member.linkedin %}
+					<div class="row">
+						<span class="icon-linkedin"></span> <a href="{{ member.linkedin }}" class="facebook" target="_blank">{{ member.linkedin }}</a>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+	</article>
+	{% endfor %}
+</main>
+<script src="{{ asset('build/js/screen.js') }}"></script>
+</body>
+</html>

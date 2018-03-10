@@ -1,0 +1,66 @@
+$silicon-yellow: #fbd800;
+$silicon-darkyellow: #e2c200;
+$silicon-blue: #21bbef;
+$silicon-darkblue: #11b0e6;
+
+@import 'variables.scss';
+@import 'style.scss';
+
+$font-family-serif: Podkova,"Times New Roman",Times,serif;
+
+html {
+	font-size: 62.5%;
+	font-size: calc(1em * 0.625);
+}
+
+body {
+  background-color: #fff;
+  font-family: $font-family-serif;
+  overflow: hidden;
+  font-size: 4rem;
+}
+a {
+	color: $silicon-darkblue;
+}
+article {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+article h1 {
+  margin: 0;
+  padding: 0;
+  background: #fbd800;
+  font-size: 9rem;
+  text-align: center;
+  padding: 0 0.5em;
+  height: 15vh;
+  line-height: 14vh;
+}
+.content {
+  height: 81vh;
+  display: flex;
+  margin: 2vh;
+}
+.images {
+  width: 20.8vw;
+}
+.images img {
+  display: block;
+  margin-bottom: 40px;
+  width: 100%;
+  height: auto;
+}
+.infos {
+  flex-grow: 1;
+  padding: 1vw;
+}
+.bio {
+  height: 40vh;
+}
+.contact span {
+  color: $silicon-darkblue;
+}

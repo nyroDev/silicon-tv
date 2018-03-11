@@ -23,6 +23,7 @@ body {
   height: 100vh;
   margin: 0;
   transition: transform 0.3s;
+  perspective: 100vw;
 }
 a {
 	color: $silicon-darkblue;

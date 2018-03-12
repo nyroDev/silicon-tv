@@ -10,7 +10,7 @@ var body = document.querySelector('body'),
 
 if ('serviceWorker' in navigator && body.dataset.sw) {
     navigator.serviceWorker.register(body.dataset.sw, {
-      scope: '/screen'
+      scope: '/'
     }).then(function(reg) {
         console.log('service worker ready');
     });

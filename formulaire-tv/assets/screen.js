@@ -8,6 +8,14 @@ var body = document.querySelector('body'),
     nextShown,
     state;
 
+if ('serviceWorker' in navigator && body.dataset.sw) {
+    navigator.serviceWorker.register(body.dataset.sw, {
+      scope: '/screen/'
+    }).then(function(reg) {
+        console.log('service worker ready');
+    });
+}
+
 // Start by shuffling all articles
 for (var i = articlesNb; i >= 0; i--) {
     main.appendChild(main.children[Math.random() * i | 0]);
@@ -31,7 +39,7 @@ body.addEventListener('transitionend', function() {
             // Prepare the next one in reverse side
             articles[nextShown].classList.add('nextShown');
             articles[nextShown].classList.add('shown');
-            
+
             main.classList.add('anim');
         });
     } else {
@@ -58,7 +66,7 @@ main.addEventListener('transitionend', function(event) {
 
         requestAnimationFrame(function() {
             main.classList.remove('noAnim');
-    
+
             // Zoom body again
             body.classList.remove('anim');
         });

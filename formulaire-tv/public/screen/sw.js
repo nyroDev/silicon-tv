@@ -1,0 +1,39 @@
+var version = '1.0',
+    cacheName = 'silicon-cache-'+version;
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(Promise.all([
+        // Once SW is activated, claim all clients to be sure they are directly handled by SW to avoid page reload
+        self.clients.claim(),
+        // Remove old caches
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.filter(function(curCacheName) {
+                    return curCacheName.startsWith('silicon-') &&
+                         curCacheName != cacheName;
+                }).map(function(cacheName) {
+                    return caches.delete(cacheName);
+                })
+            );
+        })
+    ]));
+});
+
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request).then(function(response) {
+            if (response) {
+                // Found in cache, use it
+                return response;
+            }
+
+            return fetch(event.request).then(response) {
+                return caches.open(cacheName).then(function(cache) {
+                    // Put it in cache for later usage
+                    cache.put(event.request.url, response.clone());
+                    return response;
+                });
+            };
+        })
+    );
+});

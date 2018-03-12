@@ -1,6 +1,12 @@
 var version = '1.0',
     cacheName = 'silicon-cache-'+version;
 
+self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches.open(cacheName)
+    );
+});
+
 self.addEventListener('activate', function(event) {
     event.waitUntil(Promise.all([
         // Once SW is activated, claim all clients to be sure they are directly handled by SW to avoid page reload
@@ -27,13 +33,13 @@ self.addEventListener('fetch', function(event) {
                 return response;
             }
 
-            return fetch(event.request).then(response) {
+            return fetch(event.request).then(function(response) {
                 return caches.open(cacheName).then(function(cache) {
                     // Put it in cache for later usage
                     cache.put(event.request.url, response.clone());
                     return response;
                 });
-            };
+            });
         })
     );
 });

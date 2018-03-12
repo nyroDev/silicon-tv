@@ -582,7 +582,7 @@ class Member
 				->addViolation();
 		}
 
-		$lenBio = mb_strlen(strip_tags($this->getBio()));
+		$lenBio = mb_strlen(html_entity_decode(strip_tags($this->getBio())));
 		if ($lenBio > 250) {
 			$context->buildViolation('Veuillez ne pas dépasser 250 caractères.')
 				->atPath('bio')

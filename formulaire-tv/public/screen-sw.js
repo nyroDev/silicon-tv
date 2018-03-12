@@ -28,7 +28,7 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
 
     // Ignore element not request for screen page
-    if (!event.request.referrer.indexOf('ecran.siliconcomte.fr/screen') === -1
+    if (event.request.referrer.indexOf('ecran.siliconcomte.fr/screen') === -1
         && event.request.url.indexOf('ecran.siliconcomte.fr/screen') === -1) {
         return event.respondWith(fetch(event.request);
     }

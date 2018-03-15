@@ -77,17 +77,19 @@ main.addEventListener('transitionend', function(event) {
 body.addEventListener('keydown', function(event) {
     event = event || window.event;
     if (event.keyCode === 39 && !state) {
-        display();
+        startAnim();
     }
 });
 
+function startAnim() {
+    requestAnimationFrame(function() {
+        state = 'start';
+        body.classList.add('anim');
+    });
+}
+
 function display() {
-    setTimeout(function() {
-        requestAnimationFrame(function() {
-            state = 'start';
-            body.classList.add('anim');
-        });
-    }, displayTime * 1000);
+    setTimeout(startAnim, displayTime * 1000);
 }
 
 // Start display

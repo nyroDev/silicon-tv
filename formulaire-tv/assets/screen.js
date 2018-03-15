@@ -6,7 +6,7 @@ var body = document.querySelector('body'),
     articlesNb = articles.length,
     curShown = 0,
     nextShown,
-    state;
+    state = false;
 
 if ('serviceWorker' in navigator && body.dataset.sw) {
     navigator.serviceWorker.register(body.dataset.sw, {
@@ -44,6 +44,7 @@ body.addEventListener('transitionend', function() {
         });
     } else {
         // Start a new display
+        state = false;
         display();
     }
 });
@@ -71,6 +72,13 @@ main.addEventListener('transitionend', function(event) {
             body.classList.remove('anim');
         });
     });
+});
+
+body.addEventListener('keydown', function(event) {
+    event = event || window.event;
+    if (event.keyCode === 39 && !state) {
+        display();
+    }
 });
 
 function display() {

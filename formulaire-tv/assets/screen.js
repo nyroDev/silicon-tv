@@ -81,6 +81,11 @@ body.addEventListener('keydown', function (event) {
 		startAnim();
 	}
 });
+body.addEventListener('click', function () {
+  if (!state) {
+    startAnim();
+  }
+});
 
 function startAnim() {
 	if (curTimeout) {
